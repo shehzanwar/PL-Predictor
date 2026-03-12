@@ -1,22 +1,27 @@
 """Abstract base class for all data scrapers.
 
-Provides shared infrastructure: rate limiting, caching, retry logic,
-and team name normalization. All concrete scrapers inherit from this.
+Provides shared infrastructure: Cloudflare bypass (cloudscraper),
+rate limiting, caching, retry logic, and team name normalization.
+All concrete scrapers inherit from this.
+
+Environment variables are loaded from ``.env`` via ``python-dotenv``.
 """
 
 from __future__ import annotations
 
 import json
 import logging
+import os
 import random
 import time
 from abc import ABC, abstractmethod
 from pathlib import Path
 from typing import Any
 
+import cloudscraper
 import pandas as pd
-import requests
 from diskcache import Cache
+from dotenv import load_dotenv
 
 logger = logging.getLogger(__name__)
 
@@ -24,12 +29,18 @@ logger = logging.getLogger(__name__)
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 CONFIG_DIR = PROJECT_ROOT / "config"
 
+# Load .env file from project root (supports local API key storage)
+load_dotenv(PROJECT_ROOT / ".env")
+
 
 class BaseScraper(ABC):
     """Abstract base class enforcing a consistent scraper interface.
 
     Every scraper must implement ``scrape()`` to fetch raw data and
     ``parse()`` to convert it into a clean DataFrame.
+
+    Uses ``cloudscraper`` instead of raw ``requests`` to bypass
+    Cloudflare anti-bot protection on sites like FBRef.
 
     Attributes:
         source_name: Identifier for the data source (e.g. ``"fbref"``).
@@ -59,15 +70,14 @@ class BaseScraper(ABC):
         resolved_cache_dir = cache_dir or str(PROJECT_ROOT / "data" / "cache" / source_name)
         self.cache: Cache = Cache(resolved_cache_dir)
 
-        # HTTP session with rotating User-Agent
-        self.session = requests.Session()
-        self._user_agents = [
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
-            "(KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
-            "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_3) AppleWebKit/605.1.15 "
-            "(KHTML, like Gecko) Version/17.2 Safari/605.1.15",
-            "Mozilla/5.0 (X11; Linux x86_64; rv:123.0) Gecko/20100101 Firefox/123.0",
-        ]
+        # Cloudscraper session — bypasses Cloudflare challenges
+        self.session = cloudscraper.create_scraper(
+            browser={
+                "browser": "chrome",
+                "platform": "windows",
+                "desktop": True,
+            }
+        )
 
         # Team name mappings
         self.team_mappings: dict[str, dict[str, str]] = self._load_team_mappings()
@@ -113,7 +123,7 @@ class BaseScraper(ABC):
     # ------------------------------------------------------------------
 
     def fetch_page(self, url: str, use_cache: bool = True) -> str:
-        """Fetch an HTML page with caching and rate limiting.
+        """Fetch an HTML page with Cloudflare bypass, caching, and rate limiting.
 
         Args:
             url: Full URL to fetch.
@@ -123,7 +133,7 @@ class BaseScraper(ABC):
             Page HTML as a string.
 
         Raises:
-            requests.HTTPError: On non-2xx responses after retries.
+            Exception: On non-2xx responses after retries.
         """
         # Check cache first
         if use_cache and url in self.cache:
@@ -134,13 +144,6 @@ class BaseScraper(ABC):
 
         # Rate limiting
         self._rate_limit()
-
-        # Rotate User-Agent
-        self.session.headers.update({
-            "User-Agent": random.choice(self._user_agents),
-            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-            "Accept-Language": "en-US,en;q=0.5",
-        })
 
         logger.info("Fetching: %s", url)
         response = self.session.get(url, timeout=30)

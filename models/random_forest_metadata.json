@@ -1,0 +1,9 @@
+{
+  "accuracy": 0.5348,
+  "log_loss": 1.0054,
+  "brier_score": 0.602,
+  "n_features": 15,
+  "n_training_samples": 380,
+  "n_cv_folds": 10,
+  "saved_at": "2026-03-12T09:57:32.569137"
+}

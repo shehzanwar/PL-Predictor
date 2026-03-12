@@ -68,8 +68,8 @@ class TimeSeriesSplitter:
 
     def __init__(
         self,
-        n_splits: int = 5,
-        min_train_matches: int = 380,
+        n_splits: int = 10,
+        min_train_matches: int = 150,
         val_matches: int | None = None,
         gap_matches: int = 0,
     ) -> None:

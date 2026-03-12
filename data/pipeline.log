@@ -1,0 +1,737 @@
+2026-03-12 02:05:40 | WARNING | ingestion.api_football_client | [api_football] No API key found. Set API_FOOTBALL_KEY env var. Requests will fail with 401.
+2026-03-12 02:05:40 | WARNING | ingestion.api_football_client | [api_football] No API key found. Set API_FOOTBALL_KEY env var. Requests will fail with 401.
+2026-03-12 02:05:40 | INFO    | __main__ | Running daily update for season 2025
+2026-03-12 02:05:40 | INFO    | ingestion.base_scraper | [fbref] Starting pipeline for season 2025
+2026-03-12 02:05:46 | INFO    | ingestion.base_scraper | Fetching: https://fbref.com/en/comps/9/2025-2026/schedule/2025-2026-Premier-League-Scores-and-Fixtures
+2026-03-12 02:05:47 | ERROR   | __main__ | [fbref] Daily update failed: 403 Client Error: Forbidden for url: https://fbref.com/en/comps/9/2025-2026/schedule/2025-2026-Premier-League-Scores-and-Fixtures
+2026-03-12 02:05:47 | INFO    | ingestion.base_scraper | [understat] Starting pipeline for season 2025
+2026-03-12 02:05:49 | INFO    | ingestion.base_scraper | Fetching: https://understat.com/league/EPL/2025
+2026-03-12 02:05:50 | ERROR   | ingestion.understat_scraper | [understat] Could not find datesData JSON for season 2025
+2026-03-12 02:05:50 | INFO    | ingestion.base_scraper | Saved raw data: C:\Users\couga\OneDrive\Documents\My Projects\PL-Predictor\data\raw\understat_season_2025.csv (0 rows)
+2026-03-12 02:25:54 | INFO    | __main__ | Running daily update for season 2025
+2026-03-12 02:25:54 | INFO    | ingestion.base_scraper | [fbref] Starting pipeline for season 2025
+2026-03-12 02:25:58 | INFO    | ingestion.base_scraper | Fetching: https://fbref.com/en/comps/9/2025-2026/schedule/2025-2026-Premier-League-Scores-and-Fixtures
+2026-03-12 02:25:58 | ERROR   | __main__ | [fbref] Daily update failed: 403 Client Error: Forbidden for url: https://fbref.com/en/comps/9/2025-2026/schedule/2025-2026-Premier-League-Scores-and-Fixtures
+2026-03-12 02:25:58 | INFO    | ingestion.base_scraper | [understat] Starting pipeline for season 2025
+2026-03-12 02:26:00 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures?league=39&season=2025&status=FT "HTTP/1.1 200 OK"
+2026-03-12 02:26:00 | ERROR   | ingestion.understat_scraper | [understat] API errors: {'plan': 'Free plans do not have access to this season, try from 2022 to 2024.'}
+2026-03-12 02:26:00 | INFO    | ingestion.base_scraper | Saved raw data: C:\Users\couga\OneDrive\Documents\My Projects\PL-Predictor\data\raw\understat_season_2025.csv (0 rows)
+2026-03-12 02:26:00 | WARNING | __main__ | Both FBRef and Understat data are empty.
+2026-03-12 02:26:00 | INFO    | __main__ | Updated matches: 0 rows
+2026-03-12 02:26:01 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures?league=39&season=2025&status=FT "HTTP/1.1 200 OK"
+2026-03-12 02:26:01 | ERROR   | ingestion.understat_scraper | [understat] API errors: {'plan': 'Free plans do not have access to this season, try from 2022 to 2024.'}
+2026-03-12 02:26:02 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/injuries?league=39&season=2025 "HTTP/1.1 200 OK"
+2026-03-12 02:26:02 | ERROR   | ingestion.api_football_client | [api_football] API errors: {'plan': 'Free plans do not have access to this season, try from 2022 to 2024.'}
+2026-03-12 02:26:02 | WARNING | ingestion.injury_scraper | [injuries] No injury data returned for season 2025
+2026-03-12 02:26:02 | INFO    | ingestion.injury_scraper | [injuries] No injuries — all squads fully available.
+2026-03-12 02:26:02 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/standings?league=39&season=2025 "HTTP/1.1 200 OK"
+2026-03-12 02:26:02 | ERROR   | ingestion.api_football_client | [api_football] API errors: {'plan': 'Free plans do not have access to this season, try from 2022 to 2024.'}
+2026-03-12 02:26:04 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures?league=39&next=10 "HTTP/1.1 200 OK"
+2026-03-12 02:26:04 | ERROR   | ingestion.api_football_client | [api_football] API errors: {'plan': 'Free plans do not have access to the Next parameter.'}
+2026-03-12 02:26:04 | INFO    | __main__ | Pipeline finished. Outputs:
+2026-03-12 02:26:04 | INFO    | __main__ |   matches -> C:\Users\couga\OneDrive\Documents\My Projects\PL-Predictor\data\processed\pl_matches_merged.csv
+2026-03-12 02:26:04 | INFO    | __main__ |   xg_season -> C:\Users\couga\OneDrive\Documents\My Projects\PL-Predictor\data\processed\pl_xg_season_stats.csv
+2026-03-12 02:26:04 | INFO    | __main__ |   injuries -> C:\Users\couga\OneDrive\Documents\My Projects\PL-Predictor\data\processed\pl_current_injuries.csv
+2026-03-12 02:26:04 | INFO    | __main__ |   standings -> C:\Users\couga\OneDrive\Documents\My Projects\PL-Predictor\data\processed\pl_current_standings.csv
+2026-03-12 02:26:04 | INFO    | __main__ |   upcoming -> C:\Users\couga\OneDrive\Documents\My Projects\PL-Predictor\data\processed\pl_upcoming_fixtures.csv
+2026-03-12 02:30:16 | INFO    | __main__ | ============================================================
+2026-03-12 02:30:16 | INFO    | __main__ | PL-Predictor Data Pipeline — Starting at 2026-03-12 09:30:16.140365
+2026-03-12 02:30:16 | INFO    | __main__ | ============================================================
+2026-03-12 02:30:16 | INFO    | __main__ | --- Processing season 2020 ---
+2026-03-12 02:30:16 | INFO    | ingestion.base_scraper | [fbref] Starting pipeline for season 2020
+2026-03-12 02:30:23 | INFO    | ingestion.base_scraper | Fetching: https://fbref.com/en/comps/9/2020-2021/schedule/2020-2021-Premier-League-Scores-and-Fixtures
+2026-03-12 02:30:24 | ERROR   | __main__ | [fbref] Failed for season 2020: 403 Client Error: Forbidden for url: https://fbref.com/en/comps/9/2020-2021/schedule/2020-2021-Premier-League-Scores-and-Fixtures
+2026-03-12 02:30:24 | INFO    | ingestion.base_scraper | [understat] Starting pipeline for season 2020
+2026-03-12 02:30:25 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures?league=39&season=2020&status=FT "HTTP/1.1 200 OK"
+2026-03-12 02:30:25 | ERROR   | ingestion.understat_scraper | [understat] API errors: {'plan': 'Free plans do not have access to this season, try from 2022 to 2024.'}
+2026-03-12 02:30:25 | INFO    | ingestion.base_scraper | Saved raw data: C:\Users\couga\OneDrive\Documents\My Projects\PL-Predictor\data\raw\understat_season_2020.csv (0 rows)
+2026-03-12 02:30:25 | INFO    | __main__ | [understat] Season 2020: 0 matches
+2026-03-12 02:30:26 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures?league=39&season=2020&status=FT "HTTP/1.1 200 OK"
+2026-03-12 02:30:26 | ERROR   | ingestion.understat_scraper | [understat] API errors: {'plan': 'Free plans do not have access to this season, try from 2022 to 2024.'}
+2026-03-12 02:30:26 | INFO    | __main__ | --- Processing season 2021 ---
+2026-03-12 02:30:26 | INFO    | ingestion.base_scraper | [fbref] Starting pipeline for season 2021
+2026-03-12 02:30:33 | INFO    | ingestion.base_scraper | Fetching: https://fbref.com/en/comps/9/2021-2022/schedule/2021-2022-Premier-League-Scores-and-Fixtures
+2026-03-12 02:30:33 | ERROR   | __main__ | [fbref] Failed for season 2021: 403 Client Error: Forbidden for url: https://fbref.com/en/comps/9/2021-2022/schedule/2021-2022-Premier-League-Scores-and-Fixtures
+2026-03-12 02:30:33 | INFO    | ingestion.base_scraper | [understat] Starting pipeline for season 2021
+2026-03-12 02:30:33 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures?league=39&season=2021&status=FT "HTTP/1.1 200 OK"
+2026-03-12 02:30:33 | ERROR   | ingestion.understat_scraper | [understat] API errors: {'plan': 'Free plans do not have access to this season, try from 2022 to 2024.'}
+2026-03-12 02:30:33 | INFO    | ingestion.base_scraper | Saved raw data: C:\Users\couga\OneDrive\Documents\My Projects\PL-Predictor\data\raw\understat_season_2021.csv (0 rows)
+2026-03-12 02:30:33 | INFO    | __main__ | [understat] Season 2021: 0 matches
+2026-03-12 02:30:34 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures?league=39&season=2021&status=FT "HTTP/1.1 200 OK"
+2026-03-12 02:30:34 | ERROR   | ingestion.understat_scraper | [understat] API errors: {'plan': 'Free plans do not have access to this season, try from 2022 to 2024.'}
+2026-03-12 02:30:34 | INFO    | __main__ | --- Processing season 2022 ---
+2026-03-12 02:30:34 | INFO    | ingestion.base_scraper | [fbref] Starting pipeline for season 2022
+2026-03-12 02:30:38 | INFO    | ingestion.base_scraper | Fetching: https://fbref.com/en/comps/9/2022-2023/schedule/2022-2023-Premier-League-Scores-and-Fixtures
+2026-03-12 02:30:39 | ERROR   | __main__ | [fbref] Failed for season 2022: 403 Client Error: Forbidden for url: https://fbref.com/en/comps/9/2022-2023/schedule/2022-2023-Premier-League-Scores-and-Fixtures
+2026-03-12 02:30:39 | INFO    | ingestion.base_scraper | [understat] Starting pipeline for season 2022
+2026-03-12 02:30:40 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures?league=39&season=2022&status=FT "HTTP/1.1 200 OK"
+2026-03-12 02:30:41 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867946 "HTTP/1.1 200 OK"
+2026-03-12 02:30:41 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867947 "HTTP/1.1 200 OK"
+2026-03-12 02:30:42 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867951 "HTTP/1.1 200 OK"
+2026-03-12 02:30:43 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867948 "HTTP/1.1 200 OK"
+2026-03-12 02:30:44 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867952 "HTTP/1.1 200 OK"
+2026-03-12 02:30:45 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867949 "HTTP/1.1 200 OK"
+2026-03-12 02:30:46 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867953 "HTTP/1.1 200 OK"
+2026-03-12 02:30:46 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867954 "HTTP/1.1 200 OK"
+2026-03-12 02:30:47 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867950 "HTTP/1.1 200 OK"
+2026-03-12 02:30:48 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867955 "HTTP/1.1 200 OK"
+2026-03-12 02:30:49 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867957 "HTTP/1.1 200 OK"
+2026-03-12 02:30:50 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867965 "HTTP/1.1 200 OK"
+2026-03-12 02:30:51 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867964 "HTTP/1.1 200 OK"
+2026-03-12 02:30:52 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867956 "HTTP/1.1 200 OK"
+2026-03-12 02:30:53 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867962 "HTTP/1.1 200 OK"
+2026-03-12 02:30:54 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867959 "HTTP/1.1 200 OK"
+2026-03-12 02:30:55 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867958 "HTTP/1.1 200 OK"
+2026-03-12 02:30:55 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867963 "HTTP/1.1 200 OK"
+2026-03-12 02:30:56 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867960 "HTTP/1.1 200 OK"
+2026-03-12 02:30:57 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867961 "HTTP/1.1 200 OK"
+2026-03-12 02:30:58 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867974 "HTTP/1.1 200 OK"
+2026-03-12 02:30:59 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867969 "HTTP/1.1 200 OK"
+2026-03-12 02:31:00 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867968 "HTTP/1.1 200 OK"
+2026-03-12 02:31:01 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867971 "HTTP/1.1 200 OK"
+2026-03-12 02:31:02 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867967 "HTTP/1.1 200 OK"
+2026-03-12 02:31:03 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867966 "HTTP/1.1 200 OK"
+2026-03-12 02:31:04 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867975 "HTTP/1.1 200 OK"
+2026-03-12 02:31:05 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867970 "HTTP/1.1 200 OK"
+2026-03-12 02:31:06 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867973 "HTTP/1.1 200 OK"
+2026-03-12 02:31:07 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867972 "HTTP/1.1 200 OK"
+2026-03-12 02:31:08 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867984 "HTTP/1.1 200 OK"
+2026-03-12 02:31:09 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867981 "HTTP/1.1 200 OK"
+2026-03-12 02:31:09 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867980 "HTTP/1.1 200 OK"
+2026-03-12 02:31:11 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867982 "HTTP/1.1 200 OK"
+2026-03-12 02:31:12 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867979 "HTTP/1.1 200 OK"
+2026-03-12 02:31:12 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867978 "HTTP/1.1 200 OK"
+2026-03-12 02:31:13 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867976 "HTTP/1.1 200 OK"
+2026-03-12 02:31:14 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867985 "HTTP/1.1 200 OK"
+2026-03-12 02:31:15 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867977 "HTTP/1.1 200 OK"
+2026-03-12 02:31:16 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867983 "HTTP/1.1 200 OK"
+2026-03-12 02:31:17 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867988 "HTTP/1.1 200 OK"
+2026-03-12 02:31:17 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867992 "HTTP/1.1 200 OK"
+2026-03-12 02:31:19 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867993 "HTTP/1.1 200 OK"
+2026-03-12 02:31:20 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867989 "HTTP/1.1 200 OK"
+2026-03-12 02:31:21 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867986 "HTTP/1.1 200 OK"
+2026-03-12 02:31:21 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867987 "HTTP/1.1 200 OK"
+2026-03-12 02:31:22 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867995 "HTTP/1.1 200 OK"
+2026-03-12 02:31:23 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867991 "HTTP/1.1 200 OK"
+2026-03-12 02:31:24 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867994 "HTTP/1.1 200 OK"
+2026-03-12 02:31:25 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867990 "HTTP/1.1 200 OK"
+2026-03-12 02:31:26 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868000 "HTTP/1.1 200 OK"
+2026-03-12 02:31:27 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868002 "HTTP/1.1 200 OK"
+2026-03-12 02:31:28 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868005 "HTTP/1.1 200 OK"
+2026-03-12 02:31:29 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868004 "HTTP/1.1 200 OK"
+2026-03-12 02:31:30 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867999 "HTTP/1.1 200 OK"
+2026-03-12 02:31:31 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867997 "HTTP/1.1 200 OK"
+2026-03-12 02:31:32 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868003 "HTTP/1.1 200 OK"
+2026-03-12 02:31:32 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867996 "HTTP/1.1 200 OK"
+2026-03-12 02:31:33 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=867998 "HTTP/1.1 200 OK"
+2026-03-12 02:31:34 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868001 "HTTP/1.1 200 OK"
+2026-03-12 02:31:35 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868023 "HTTP/1.1 200 OK"
+2026-03-12 02:31:36 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868016 "HTTP/1.1 200 OK"
+2026-03-12 02:31:37 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868025 "HTTP/1.1 200 OK"
+2026-03-12 02:31:38 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868022 "HTTP/1.1 200 OK"
+2026-03-12 02:31:39 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868024 "HTTP/1.1 200 OK"
+2026-03-12 02:31:39 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868017 "HTTP/1.1 200 OK"
+2026-03-12 02:31:40 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868020 "HTTP/1.1 200 OK"
+2026-03-12 02:31:41 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868027 "HTTP/1.1 200 OK"
+2026-03-12 02:31:42 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868026 "HTTP/1.1 200 OK"
+2026-03-12 02:31:43 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868029 "HTTP/1.1 200 OK"
+2026-03-12 02:31:43 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868032 "HTTP/1.1 200 OK"
+2026-03-12 02:31:44 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868034 "HTTP/1.1 200 OK"
+2026-03-12 02:31:45 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868028 "HTTP/1.1 200 OK"
+2026-03-12 02:31:46 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868035 "HTTP/1.1 200 OK"
+2026-03-12 02:31:47 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868033 "HTTP/1.1 200 OK"
+2026-03-12 02:31:47 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868030 "HTTP/1.1 200 OK"
+2026-03-12 02:31:48 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868031 "HTTP/1.1 200 OK"
+2026-03-12 02:31:49 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868043 "HTTP/1.1 200 OK"
+2026-03-12 02:31:50 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868036 "HTTP/1.1 200 OK"
+2026-03-12 02:31:51 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868039 "HTTP/1.1 200 OK"
+2026-03-12 02:31:52 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868042 "HTTP/1.1 200 OK"
+2026-03-12 02:31:53 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868038 "HTTP/1.1 200 OK"
+2026-03-12 02:31:54 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868045 "HTTP/1.1 200 OK"
+2026-03-12 02:31:55 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868040 "HTTP/1.1 200 OK"
+2026-03-12 02:31:56 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868037 "HTTP/1.1 200 OK"
+2026-03-12 02:31:57 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868041 "HTTP/1.1 200 OK"
+2026-03-12 02:31:58 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868044 "HTTP/1.1 200 OK"
+2026-03-12 02:31:58 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868047 "HTTP/1.1 200 OK"
+2026-03-12 02:31:59 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868050 "HTTP/1.1 200 OK"
+2026-03-12 02:32:00 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868048 "HTTP/1.1 200 OK"
+2026-03-12 02:32:01 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868055 "HTTP/1.1 200 OK"
+2026-03-12 02:32:02 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868054 "HTTP/1.1 200 OK"
+2026-03-12 02:32:03 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868052 "HTTP/1.1 200 OK"
+2026-03-12 02:32:04 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868053 "HTTP/1.1 200 OK"
+2026-03-12 02:32:04 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868049 "HTTP/1.1 200 OK"
+2026-03-12 02:32:05 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868046 "HTTP/1.1 200 OK"
+2026-03-12 02:32:06 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868051 "HTTP/1.1 200 OK"
+2026-03-12 02:32:07 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868059 "HTTP/1.1 200 OK"
+2026-03-12 02:32:08 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868062 "HTTP/1.1 200 OK"
+2026-03-12 02:32:09 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868063 "HTTP/1.1 200 OK"
+2026-03-12 02:32:10 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868056 "HTTP/1.1 200 OK"
+2026-03-12 02:32:11 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868064 "HTTP/1.1 200 OK"
+2026-03-12 02:32:12 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868058 "HTTP/1.1 200 OK"
+2026-03-12 02:32:13 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868065 "HTTP/1.1 200 OK"
+2026-03-12 02:32:14 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868060 "HTTP/1.1 200 OK"
+2026-03-12 02:32:15 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868061 "HTTP/1.1 200 OK"
+2026-03-12 02:32:16 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868071 "HTTP/1.1 200 OK"
+2026-03-12 02:32:17 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868068 "HTTP/1.1 200 OK"
+2026-03-12 02:32:18 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868070 "HTTP/1.1 200 OK"
+2026-03-12 02:32:19 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868067 "HTTP/1.1 200 OK"
+2026-03-12 02:32:20 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868075 "HTTP/1.1 200 OK"
+2026-03-12 02:32:20 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868072 "HTTP/1.1 200 OK"
+2026-03-12 02:32:21 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868069 "HTTP/1.1 200 OK"
+2026-03-12 02:32:22 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868066 "HTTP/1.1 200 OK"
+2026-03-12 02:32:23 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868073 "HTTP/1.1 200 OK"
+2026-03-12 02:32:24 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868074 "HTTP/1.1 200 OK"
+2026-03-12 02:32:25 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868082 "HTTP/1.1 200 OK"
+2026-03-12 02:32:26 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868085 "HTTP/1.1 200 OK"
+2026-03-12 02:32:27 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868076 "HTTP/1.1 200 OK"
+2026-03-12 02:32:28 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868079 "HTTP/1.1 200 OK"
+2026-03-12 02:32:29 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868080 "HTTP/1.1 200 OK"
+2026-03-12 02:32:30 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868078 "HTTP/1.1 200 OK"
+2026-03-12 02:32:30 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868081 "HTTP/1.1 200 OK"
+2026-03-12 02:32:31 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868083 "HTTP/1.1 200 OK"
+2026-03-12 02:32:32 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868077 "HTTP/1.1 200 OK"
+2026-03-12 02:32:33 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868084 "HTTP/1.1 200 OK"
+2026-03-12 02:32:34 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868095 "HTTP/1.1 200 OK"
+2026-03-12 02:32:35 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868090 "HTTP/1.1 200 OK"
+2026-03-12 02:32:37 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868089 "HTTP/1.1 200 OK"
+2026-03-12 02:32:37 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868091 "HTTP/1.1 200 OK"
+2026-03-12 02:32:38 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868088 "HTTP/1.1 200 OK"
+2026-03-12 02:32:39 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868087 "HTTP/1.1 200 OK"
+2026-03-12 02:32:40 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868092 "HTTP/1.1 200 OK"
+2026-03-12 02:32:41 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868094 "HTTP/1.1 200 OK"
+2026-03-12 02:32:42 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868086 "HTTP/1.1 200 OK"
+2026-03-12 02:32:43 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868093 "HTTP/1.1 200 OK"
+2026-03-12 02:32:44 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868100 "HTTP/1.1 200 OK"
+2026-03-12 02:32:45 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868096 "HTTP/1.1 200 OK"
+2026-03-12 02:32:46 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868099 "HTTP/1.1 200 OK"
+2026-03-12 02:32:47 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868103 "HTTP/1.1 200 OK"
+2026-03-12 02:32:48 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868104 "HTTP/1.1 200 OK"
+2026-03-12 02:32:49 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868102 "HTTP/1.1 200 OK"
+2026-03-12 02:32:50 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868101 "HTTP/1.1 200 OK"
+2026-03-12 02:32:51 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868105 "HTTP/1.1 200 OK"
+2026-03-12 02:32:52 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868097 "HTTP/1.1 200 OK"
+2026-03-12 02:32:53 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868098 "HTTP/1.1 200 OK"
+2026-03-12 02:32:54 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868108 "HTTP/1.1 200 OK"
+2026-03-12 02:32:55 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868115 "HTTP/1.1 200 OK"
+2026-03-12 02:32:56 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868111 "HTTP/1.1 200 OK"
+2026-03-12 02:32:57 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868113 "HTTP/1.1 200 OK"
+2026-03-12 02:32:58 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868110 "HTTP/1.1 200 OK"
+2026-03-12 02:32:58 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868107 "HTTP/1.1 200 OK"
+2026-03-12 02:32:59 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868106 "HTTP/1.1 200 OK"
+2026-03-12 02:33:00 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868109 "HTTP/1.1 200 OK"
+2026-03-12 02:33:01 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868114 "HTTP/1.1 200 OK"
+2026-03-12 02:33:02 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868112 "HTTP/1.1 200 OK"
+2026-03-12 02:33:03 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868124 "HTTP/1.1 200 OK"
+2026-03-12 02:33:04 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868119 "HTTP/1.1 200 OK"
+2026-03-12 02:33:05 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868125 "HTTP/1.1 200 OK"
+2026-03-12 02:33:06 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868121 "HTTP/1.1 200 OK"
+2026-03-12 02:33:07 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868116 "HTTP/1.1 200 OK"
+2026-03-12 02:33:08 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868118 "HTTP/1.1 200 OK"
+2026-03-12 02:33:09 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868120 "HTTP/1.1 200 OK"
+2026-03-12 02:33:10 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868117 "HTTP/1.1 200 OK"
+2026-03-12 02:33:11 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868123 "HTTP/1.1 200 OK"
+2026-03-12 02:33:12 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868122 "HTTP/1.1 200 OK"
+2026-03-12 02:33:13 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868128 "HTTP/1.1 200 OK"
+2026-03-12 02:33:13 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868126 "HTTP/1.1 200 OK"
+2026-03-12 02:33:14 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868131 "HTTP/1.1 200 OK"
+2026-03-12 02:33:15 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868133 "HTTP/1.1 200 OK"
+2026-03-12 02:33:16 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868134 "HTTP/1.1 200 OK"
+2026-03-12 02:33:17 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868135 "HTTP/1.1 200 OK"
+2026-03-12 02:33:18 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868132 "HTTP/1.1 200 OK"
+2026-03-12 02:33:19 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868130 "HTTP/1.1 200 OK"
+2026-03-12 02:33:20 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868127 "HTTP/1.1 200 OK"
+2026-03-12 02:33:21 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868129 "HTTP/1.1 200 OK"
+2026-03-12 02:33:22 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868009 "HTTP/1.1 200 OK"
+2026-03-12 02:33:23 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868136 "HTTP/1.1 200 OK"
+2026-03-12 02:33:24 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868141 "HTTP/1.1 200 OK"
+2026-03-12 02:33:25 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868145 "HTTP/1.1 200 OK"
+2026-03-12 02:33:26 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868140 "HTTP/1.1 200 OK"
+2026-03-12 02:33:27 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868138 "HTTP/1.1 200 OK"
+2026-03-12 02:33:28 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868143 "HTTP/1.1 200 OK"
+2026-03-12 02:33:29 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868137 "HTTP/1.1 200 OK"
+2026-03-12 02:33:29 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868142 "HTTP/1.1 200 OK"
+2026-03-12 02:33:30 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868139 "HTTP/1.1 200 OK"
+2026-03-12 02:33:32 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868144 "HTTP/1.1 200 OK"
+2026-03-12 02:33:32 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868008 "HTTP/1.1 200 OK"
+2026-03-12 02:33:33 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868013 "HTTP/1.1 200 OK"
+2026-03-12 02:33:34 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868152 "HTTP/1.1 200 OK"
+2026-03-12 02:33:35 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868146 "HTTP/1.1 200 OK"
+2026-03-12 02:33:36 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868154 "HTTP/1.1 200 OK"
+2026-03-12 02:33:37 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868151 "HTTP/1.1 200 OK"
+2026-03-12 02:33:38 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868155 "HTTP/1.1 200 OK"
+2026-03-12 02:33:39 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868148 "HTTP/1.1 200 OK"
+2026-03-12 02:33:40 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868153 "HTTP/1.1 200 OK"
+2026-03-12 02:33:41 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868150 "HTTP/1.1 200 OK"
+2026-03-12 02:33:42 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868147 "HTTP/1.1 200 OK"
+2026-03-12 02:33:43 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868149 "HTTP/1.1 200 OK"
+2026-03-12 02:33:44 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868159 "HTTP/1.1 200 OK"
+2026-03-12 02:33:45 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868160 "HTTP/1.1 200 OK"
+2026-03-12 02:33:46 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868161 "HTTP/1.1 200 OK"
+2026-03-12 02:33:47 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868165 "HTTP/1.1 200 OK"
+2026-03-12 02:33:48 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868158 "HTTP/1.1 200 OK"
+2026-03-12 02:33:48 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868157 "HTTP/1.1 200 OK"
+2026-03-12 02:33:50 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868156 "HTTP/1.1 200 OK"
+2026-03-12 02:33:51 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868162 "HTTP/1.1 200 OK"
+2026-03-12 02:33:52 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868163 "HTTP/1.1 200 OK"
+2026-03-12 02:33:52 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868164 "HTTP/1.1 200 OK"
+2026-03-12 02:33:53 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868021 "HTTP/1.1 200 OK"
+2026-03-12 02:33:54 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868175 "HTTP/1.1 200 OK"
+2026-03-12 02:33:55 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868169 "HTTP/1.1 200 OK"
+2026-03-12 02:33:56 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868174 "HTTP/1.1 200 OK"
+2026-03-12 02:33:57 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868167 "HTTP/1.1 200 OK"
+2026-03-12 02:33:58 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868171 "HTTP/1.1 200 OK"
+2026-03-12 02:33:58 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868168 "HTTP/1.1 200 OK"
+2026-03-12 02:34:00 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868166 "HTTP/1.1 200 OK"
+2026-03-12 02:34:01 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868170 "HTTP/1.1 200 OK"
+2026-03-12 02:34:02 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868173 "HTTP/1.1 200 OK"
+2026-03-12 02:34:03 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868172 "HTTP/1.1 200 OK"
+2026-03-12 02:34:04 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868057 "HTTP/1.1 200 OK"
+2026-03-12 02:34:05 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868176 "HTTP/1.1 200 OK"
+2026-03-12 02:34:06 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868185 "HTTP/1.1 200 OK"
+2026-03-12 02:34:07 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868180 "HTTP/1.1 200 OK"
+2026-03-12 02:34:08 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868179 "HTTP/1.1 200 OK"
+2026-03-12 02:34:09 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868178 "HTTP/1.1 200 OK"
+2026-03-12 02:34:10 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868177 "HTTP/1.1 200 OK"
+2026-03-12 02:34:10 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868183 "HTTP/1.1 200 OK"
+2026-03-12 02:34:11 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868182 "HTTP/1.1 200 OK"
+2026-03-12 02:34:12 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868181 "HTTP/1.1 200 OK"
+2026-03-12 02:34:13 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868184 "HTTP/1.1 200 OK"
+2026-03-12 02:34:14 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868189 "HTTP/1.1 200 OK"
+2026-03-12 02:34:15 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868188 "HTTP/1.1 200 OK"
+2026-03-12 02:34:16 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868191 "HTTP/1.1 200 OK"
+2026-03-12 02:34:17 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868195 "HTTP/1.1 200 OK"
+2026-03-12 02:34:18 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868190 "HTTP/1.1 200 OK"
+2026-03-12 02:34:19 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868186 "HTTP/1.1 200 OK"
+2026-03-12 02:34:20 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868187 "HTTP/1.1 200 OK"
+2026-03-12 02:34:21 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868194 "HTTP/1.1 200 OK"
+2026-03-12 02:34:22 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868007 "HTTP/1.1 200 OK"
+2026-03-12 02:34:23 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868012 "HTTP/1.1 200 OK"
+2026-03-12 02:34:24 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868202 "HTTP/1.1 200 OK"
+2026-03-12 02:34:25 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868205 "HTTP/1.1 200 OK"
+2026-03-12 02:34:26 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868196 "HTTP/1.1 200 OK"
+2026-03-12 02:34:27 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868200 "HTTP/1.1 200 OK"
+2026-03-12 02:34:28 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868199 "HTTP/1.1 200 OK"
+2026-03-12 02:34:28 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868197 "HTTP/1.1 200 OK"
+2026-03-12 02:34:29 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868204 "HTTP/1.1 200 OK"
+2026-03-12 02:34:30 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868203 "HTTP/1.1 200 OK"
+2026-03-12 02:34:31 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868201 "HTTP/1.1 200 OK"
+2026-03-12 02:34:32 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868198 "HTTP/1.1 200 OK"
+2026-03-12 02:34:33 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868206 "HTTP/1.1 200 OK"
+2026-03-12 02:34:34 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868208 "HTTP/1.1 200 OK"
+2026-03-12 02:34:34 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868211 "HTTP/1.1 200 OK"
+2026-03-12 02:34:35 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868214 "HTTP/1.1 200 OK"
+2026-03-12 02:34:36 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868210 "HTTP/1.1 200 OK"
+2026-03-12 02:34:37 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868207 "HTTP/1.1 200 OK"
+2026-03-12 02:34:37 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868212 "HTTP/1.1 200 OK"
+2026-03-12 02:34:38 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868209 "HTTP/1.1 200 OK"
+2026-03-12 02:34:39 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868215 "HTTP/1.1 200 OK"
+2026-03-12 02:34:40 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868213 "HTTP/1.1 200 OK"
+2026-03-12 02:34:41 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868014 "HTTP/1.1 200 OK"
+2026-03-12 02:34:42 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868018 "HTTP/1.1 200 OK"
+2026-03-12 02:34:43 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868223 "HTTP/1.1 200 OK"
+2026-03-12 02:34:44 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868225 "HTTP/1.1 200 OK"
+2026-03-12 02:34:45 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868224 "HTTP/1.1 200 OK"
+2026-03-12 02:34:46 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868218 "HTTP/1.1 200 OK"
+2026-03-12 02:34:47 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868217 "HTTP/1.1 200 OK"
+2026-03-12 02:34:48 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868220 "HTTP/1.1 200 OK"
+2026-03-12 02:34:49 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868216 "HTTP/1.1 200 OK"
+2026-03-12 02:34:50 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868232 "HTTP/1.1 200 OK"
+2026-03-12 02:34:50 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868226 "HTTP/1.1 200 OK"
+2026-03-12 02:34:51 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868227 "HTTP/1.1 200 OK"
+2026-03-12 02:34:52 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868228 "HTTP/1.1 200 OK"
+2026-03-12 02:34:53 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868230 "HTTP/1.1 200 OK"
+2026-03-12 02:34:54 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868234 "HTTP/1.1 200 OK"
+2026-03-12 02:34:55 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868229 "HTTP/1.1 200 OK"
+2026-03-12 02:34:56 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868235 "HTTP/1.1 200 OK"
+2026-03-12 02:34:56 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868233 "HTTP/1.1 200 OK"
+2026-03-12 02:34:57 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868231 "HTTP/1.1 200 OK"
+2026-03-12 02:34:58 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868006 "HTTP/1.1 200 OK"
+2026-03-12 02:34:59 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868011 "HTTP/1.1 200 OK"
+2026-03-12 02:35:00 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868010 "HTTP/1.1 200 OK"
+2026-03-12 02:35:01 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868019 "HTTP/1.1 200 OK"
+2026-03-12 02:35:02 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868192 "HTTP/1.1 200 OK"
+2026-03-12 02:35:03 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868015 "HTTP/1.1 200 OK"
+2026-03-12 02:35:04 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868242 "HTTP/1.1 200 OK"
+2026-03-12 02:35:04 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868238 "HTTP/1.1 200 OK"
+2026-03-12 02:35:05 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868245 "HTTP/1.1 200 OK"
+2026-03-12 02:35:06 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868240 "HTTP/1.1 200 OK"
+2026-03-12 02:35:07 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868244 "HTTP/1.1 200 OK"
+2026-03-12 02:35:08 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868237 "HTTP/1.1 200 OK"
+2026-03-12 02:35:09 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868236 "HTTP/1.1 200 OK"
+2026-03-12 02:35:10 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868243 "HTTP/1.1 200 OK"
+2026-03-12 02:35:11 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868239 "HTTP/1.1 200 OK"
+2026-03-12 02:35:11 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868241 "HTTP/1.1 200 OK"
+2026-03-12 02:35:12 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868246 "HTTP/1.1 200 OK"
+2026-03-12 02:35:13 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868255 "HTTP/1.1 200 OK"
+2026-03-12 02:35:14 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868252 "HTTP/1.1 200 OK"
+2026-03-12 02:35:15 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868248 "HTTP/1.1 200 OK"
+2026-03-12 02:35:16 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868247 "HTTP/1.1 200 OK"
+2026-03-12 02:35:17 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868253 "HTTP/1.1 200 OK"
+2026-03-12 02:35:18 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868250 "HTTP/1.1 200 OK"
+2026-03-12 02:35:19 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868254 "HTTP/1.1 200 OK"
+2026-03-12 02:35:19 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868251 "HTTP/1.1 200 OK"
+2026-03-12 02:35:20 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868249 "HTTP/1.1 200 OK"
+2026-03-12 02:35:21 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868257 "HTTP/1.1 200 OK"
+2026-03-12 02:35:22 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868261 "HTTP/1.1 200 OK"
+2026-03-12 02:35:23 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868263 "HTTP/1.1 200 OK"
+2026-03-12 02:35:24 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868262 "HTTP/1.1 200 OK"
+2026-03-12 02:35:25 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868260 "HTTP/1.1 200 OK"
+2026-03-12 02:35:26 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868258 "HTTP/1.1 200 OK"
+2026-03-12 02:35:26 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868265 "HTTP/1.1 200 OK"
+2026-03-12 02:35:27 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868256 "HTTP/1.1 200 OK"
+2026-03-12 02:35:28 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868271 "HTTP/1.1 200 OK"
+2026-03-12 02:35:29 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868272 "HTTP/1.1 200 OK"
+2026-03-12 02:35:30 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868267 "HTTP/1.1 200 OK"
+2026-03-12 02:35:31 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868268 "HTTP/1.1 200 OK"
+2026-03-12 02:35:32 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868270 "HTTP/1.1 200 OK"
+2026-03-12 02:35:33 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868273 "HTTP/1.1 200 OK"
+2026-03-12 02:35:34 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868275 "HTTP/1.1 200 OK"
+2026-03-12 02:35:35 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868274 "HTTP/1.1 200 OK"
+2026-03-12 02:35:36 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868266 "HTTP/1.1 200 OK"
+2026-03-12 02:35:37 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868269 "HTTP/1.1 200 OK"
+2026-03-12 02:35:37 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868280 "HTTP/1.1 200 OK"
+2026-03-12 02:35:38 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868279 "HTTP/1.1 200 OK"
+2026-03-12 02:35:40 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868278 "HTTP/1.1 200 OK"
+2026-03-12 02:35:41 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868284 "HTTP/1.1 200 OK"
+2026-03-12 02:35:41 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868285 "HTTP/1.1 200 OK"
+2026-03-12 02:35:42 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868276 "HTTP/1.1 200 OK"
+2026-03-12 02:35:43 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868281 "HTTP/1.1 200 OK"
+2026-03-12 02:35:44 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868283 "HTTP/1.1 200 OK"
+2026-03-12 02:35:45 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868282 "HTTP/1.1 200 OK"
+2026-03-12 02:35:46 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868277 "HTTP/1.1 200 OK"
+2026-03-12 02:35:47 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868221 "HTTP/1.1 200 OK"
+2026-03-12 02:35:48 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868222 "HTTP/1.1 200 OK"
+2026-03-12 02:35:49 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868219 "HTTP/1.1 200 OK"
+2026-03-12 02:35:50 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868286 "HTTP/1.1 200 OK"
+2026-03-12 02:35:51 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868295 "HTTP/1.1 200 OK"
+2026-03-12 02:35:52 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868293 "HTTP/1.1 200 OK"
+2026-03-12 02:35:53 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868290 "HTTP/1.1 200 OK"
+2026-03-12 02:35:54 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868289 "HTTP/1.1 200 OK"
+2026-03-12 02:35:55 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868291 "HTTP/1.1 200 OK"
+2026-03-12 02:35:56 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868294 "HTTP/1.1 200 OK"
+2026-03-12 02:35:57 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868288 "HTTP/1.1 200 OK"
+2026-03-12 02:35:58 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868287 "HTTP/1.1 200 OK"
+2026-03-12 02:35:59 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868292 "HTTP/1.1 200 OK"
+2026-03-12 02:36:00 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868302 "HTTP/1.1 200 OK"
+2026-03-12 02:36:01 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868304 "HTTP/1.1 200 OK"
+2026-03-12 02:36:02 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868305 "HTTP/1.1 200 OK"
+2026-03-12 02:36:03 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868299 "HTTP/1.1 200 OK"
+2026-03-12 02:36:04 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868300 "HTTP/1.1 200 OK"
+2026-03-12 02:36:04 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868297 "HTTP/1.1 200 OK"
+2026-03-12 02:36:05 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868301 "HTTP/1.1 200 OK"
+2026-03-12 02:36:06 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868298 "HTTP/1.1 200 OK"
+2026-03-12 02:36:07 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868296 "HTTP/1.1 200 OK"
+2026-03-12 02:36:08 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868303 "HTTP/1.1 200 OK"
+2026-03-12 02:36:09 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868193 "HTTP/1.1 200 OK"
+2026-03-12 02:36:10 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868313 "HTTP/1.1 200 OK"
+2026-03-12 02:36:11 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868306 "HTTP/1.1 200 OK"
+2026-03-12 02:36:12 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868308 "HTTP/1.1 200 OK"
+2026-03-12 02:36:12 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868315 "HTTP/1.1 200 OK"
+2026-03-12 02:36:13 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868309 "HTTP/1.1 200 OK"
+2026-03-12 02:36:14 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868312 "HTTP/1.1 200 OK"
+2026-03-12 02:36:15 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868314 "HTTP/1.1 200 OK"
+2026-03-12 02:36:16 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868307 "HTTP/1.1 200 OK"
+2026-03-12 02:36:17 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868310 "HTTP/1.1 200 OK"
+2026-03-12 02:36:18 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868311 "HTTP/1.1 200 OK"
+2026-03-12 02:36:19 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868259 "HTTP/1.1 200 OK"
+2026-03-12 02:36:19 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868264 "HTTP/1.1 200 OK"
+2026-03-12 02:36:21 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868324 "HTTP/1.1 200 OK"
+2026-03-12 02:36:21 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868325 "HTTP/1.1 200 OK"
+2026-03-12 02:36:22 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868316 "HTTP/1.1 200 OK"
+2026-03-12 02:36:23 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868321 "HTTP/1.1 200 OK"
+2026-03-12 02:36:24 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868323 "HTTP/1.1 200 OK"
+2026-03-12 02:36:25 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868319 "HTTP/1.1 200 OK"
+2026-03-12 02:36:26 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868320 "HTTP/1.1 200 OK"
+2026-03-12 02:36:27 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868318 "HTTP/1.1 200 OK"
+2026-03-12 02:36:27 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868322 "HTTP/1.1 200 OK"
+2026-03-12 02:36:28 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures/statistics?fixture=868317 "HTTP/1.1 200 OK"
+2026-03-12 02:36:28 | INFO    | ingestion.understat_scraper | [understat] Fetched 380 fixtures for season 2022
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:28 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | INFO    | ingestion.understat_scraper | [understat] Parsed 380 match records with xG
+2026-03-12 02:36:29 | INFO    | ingestion.base_scraper | Saved raw data: C:\Users\couga\OneDrive\Documents\My Projects\PL-Predictor\data\raw\understat_season_2022.csv (380 rows)
+2026-03-12 02:36:29 | INFO    | __main__ | [understat] Season 2022: 380 matches
+2026-03-12 02:36:29 | INFO    | ingestion.understat_scraper | [understat] Cache hit for season 2022 (380 fixtures)
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Wolves' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'West Ham' — using raw name.
+2026-03-12 02:36:29 | WARNING | ingestion.base_scraper | [understat] No mapping for team 'Newcastle' — using raw name.
+2026-03-12 02:36:29 | INFO    | ingestion.understat_scraper | [understat] Parsed 380 match records with xG
+2026-03-12 02:36:29 | INFO    | __main__ | --- Processing season 2023 ---
+2026-03-12 02:36:29 | INFO    | ingestion.base_scraper | [fbref] Starting pipeline for season 2023
+2026-03-12 02:36:36 | INFO    | ingestion.base_scraper | Fetching: https://fbref.com/en/comps/9/2023-2024/schedule/2023-2024-Premier-League-Scores-and-Fixtures
+2026-03-12 02:36:36 | ERROR   | __main__ | [fbref] Failed for season 2023: 403 Client Error: Forbidden for url: https://fbref.com/en/comps/9/2023-2024/schedule/2023-2024-Premier-League-Scores-and-Fixtures
+2026-03-12 02:36:36 | INFO    | ingestion.base_scraper | [understat] Starting pipeline for season 2023
+2026-03-12 02:36:38 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures?league=39&season=2023&status=FT "HTTP/1.1 200 OK"
+2026-03-12 02:36:38 | ERROR   | ingestion.understat_scraper | [understat] API errors: {'rateLimit': 'Too many requests. Your rate limit is 10 requests per minute.'}
+2026-03-12 02:36:38 | INFO    | ingestion.base_scraper | Saved raw data: C:\Users\couga\OneDrive\Documents\My Projects\PL-Predictor\data\raw\understat_season_2023.csv (0 rows)
+2026-03-12 02:36:38 | INFO    | __main__ | [understat] Season 2023: 0 matches
+2026-03-12 02:36:39 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures?league=39&season=2023&status=FT "HTTP/1.1 200 OK"
+2026-03-12 02:36:39 | ERROR   | ingestion.understat_scraper | [understat] API errors: {'rateLimit': 'Too many requests. Your rate limit is 10 requests per minute.'}
+2026-03-12 02:36:39 | INFO    | __main__ | --- Processing season 2024 ---
+2026-03-12 02:36:39 | INFO    | ingestion.base_scraper | [fbref] Starting pipeline for season 2024
+2026-03-12 02:36:45 | INFO    | ingestion.base_scraper | Fetching: https://fbref.com/en/comps/9/2024-2025/schedule/2024-2025-Premier-League-Scores-and-Fixtures
+2026-03-12 02:36:45 | ERROR   | __main__ | [fbref] Failed for season 2024: 403 Client Error: Forbidden for url: https://fbref.com/en/comps/9/2024-2025/schedule/2024-2025-Premier-League-Scores-and-Fixtures
+2026-03-12 02:36:45 | INFO    | ingestion.base_scraper | [understat] Starting pipeline for season 2024
+2026-03-12 02:36:46 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures?league=39&season=2024&status=FT "HTTP/1.1 200 OK"
+2026-03-12 02:36:46 | ERROR   | ingestion.understat_scraper | [understat] API errors: {'rateLimit': 'Too many requests. Your rate limit is 10 requests per minute.'}
+2026-03-12 02:36:46 | INFO    | ingestion.base_scraper | Saved raw data: C:\Users\couga\OneDrive\Documents\My Projects\PL-Predictor\data\raw\understat_season_2024.csv (0 rows)
+2026-03-12 02:36:46 | INFO    | __main__ | [understat] Season 2024: 0 matches
+2026-03-12 02:36:47 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures?league=39&season=2024&status=FT "HTTP/1.1 200 OK"
+2026-03-12 02:36:47 | ERROR   | ingestion.understat_scraper | [understat] API errors: {'rateLimit': 'Too many requests. Your rate limit is 10 requests per minute.'}
+2026-03-12 02:36:47 | INFO    | __main__ | --- Processing season 2025 ---
+2026-03-12 02:36:47 | INFO    | ingestion.base_scraper | [fbref] Starting pipeline for season 2025
+2026-03-12 02:36:55 | INFO    | ingestion.base_scraper | Fetching: https://fbref.com/en/comps/9/2025-2026/schedule/2025-2026-Premier-League-Scores-and-Fixtures
+2026-03-12 02:36:55 | ERROR   | __main__ | [fbref] Failed for season 2025: 403 Client Error: Forbidden for url: https://fbref.com/en/comps/9/2025-2026/schedule/2025-2026-Premier-League-Scores-and-Fixtures
+2026-03-12 02:36:55 | INFO    | ingestion.base_scraper | [understat] Starting pipeline for season 2025
+2026-03-12 02:36:56 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures?league=39&season=2025&status=FT "HTTP/1.1 200 OK"
+2026-03-12 02:36:56 | ERROR   | ingestion.understat_scraper | [understat] API errors: {'plan': 'Free plans do not have access to this season, try from 2022 to 2024.'}
+2026-03-12 02:36:56 | INFO    | ingestion.base_scraper | Saved raw data: C:\Users\couga\OneDrive\Documents\My Projects\PL-Predictor\data\raw\understat_season_2025.csv (0 rows)
+2026-03-12 02:36:56 | INFO    | __main__ | [understat] Season 2025: 0 matches
+2026-03-12 02:36:57 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures?league=39&season=2025&status=FT "HTTP/1.1 200 OK"
+2026-03-12 02:36:57 | ERROR   | ingestion.understat_scraper | [understat] API errors: {'plan': 'Free plans do not have access to this season, try from 2022 to 2024.'}
+2026-03-12 02:36:57 | WARNING | __main__ | FBRef data is empty — returning Understat only.
+2026-03-12 02:36:57 | INFO    | __main__ | Saved merged matches: C:\Users\couga\OneDrive\Documents\My Projects\PL-Predictor\data\processed\pl_matches_merged.csv (380 rows)
+2026-03-12 02:36:57 | INFO    | __main__ | Saved xG season stats: C:\Users\couga\OneDrive\Documents\My Projects\PL-Predictor\data\processed\pl_xg_season_stats.csv
+2026-03-12 02:36:58 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/injuries?league=39&season=2025 "HTTP/1.1 200 OK"
+2026-03-12 02:36:58 | ERROR   | ingestion.api_football_client | [api_football] API errors: {'plan': 'Free plans do not have access to this season, try from 2022 to 2024.'}
+2026-03-12 02:36:58 | WARNING | ingestion.injury_scraper | [injuries] No injury data returned for season 2025
+2026-03-12 02:36:58 | INFO    | ingestion.injury_scraper | [injuries] No injuries — all squads fully available.
+2026-03-12 02:36:58 | INFO    | __main__ | Saved injuries: C:\Users\couga\OneDrive\Documents\My Projects\PL-Predictor\data\processed\pl_current_injuries.csv
+2026-03-12 02:36:59 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/standings?league=39&season=2025 "HTTP/1.1 200 OK"
+2026-03-12 02:36:59 | ERROR   | ingestion.api_football_client | [api_football] API errors: {'plan': 'Free plans do not have access to this season, try from 2022 to 2024.'}
+2026-03-12 02:36:59 | INFO    | __main__ | Saved standings: C:\Users\couga\OneDrive\Documents\My Projects\PL-Predictor\data\processed\pl_current_standings.csv
+2026-03-12 02:37:00 | INFO    | httpx | HTTP Request: GET https://v3.football.api-sports.io/fixtures?league=39&next=10 "HTTP/1.1 200 OK"
+2026-03-12 02:37:00 | ERROR   | ingestion.api_football_client | [api_football] API errors: {'plan': 'Free plans do not have access to the Next parameter.'}
+2026-03-12 02:37:00 | INFO    | __main__ | Saved upcoming fixtures: C:\Users\couga\OneDrive\Documents\My Projects\PL-Predictor\data\processed\pl_upcoming_fixtures.csv
+2026-03-12 02:37:00 | INFO    | __main__ | ============================================================
+2026-03-12 02:37:00 | INFO    | __main__ | Pipeline complete. 5 outputs saved.
+2026-03-12 02:37:00 | INFO    | __main__ | ============================================================
+2026-03-12 02:37:00 | INFO    | __main__ | Pipeline finished. Outputs:
+2026-03-12 02:37:00 | INFO    | __main__ |   matches -> C:\Users\couga\OneDrive\Documents\My Projects\PL-Predictor\data\processed\pl_matches_merged.csv
+2026-03-12 02:37:00 | INFO    | __main__ |   xg_season -> C:\Users\couga\OneDrive\Documents\My Projects\PL-Predictor\data\processed\pl_xg_season_stats.csv
+2026-03-12 02:37:00 | INFO    | __main__ |   injuries -> C:\Users\couga\OneDrive\Documents\My Projects\PL-Predictor\data\processed\pl_current_injuries.csv
+2026-03-12 02:37:00 | INFO    | __main__ |   standings -> C:\Users\couga\OneDrive\Documents\My Projects\PL-Predictor\data\processed\pl_current_standings.csv
+2026-03-12 02:37:00 | INFO    | __main__ |   upcoming -> C:\Users\couga\OneDrive\Documents\My Projects\PL-Predictor\data\processed\pl_upcoming_fixtures.csv

@@ -50,8 +50,8 @@ ID_COLUMNS = [
 ]
 
 # Walk-forward validation config
-N_SPLITS: int = 5
-MIN_TRAIN_MATCHES: int = 380  # ~1 full season before first validation fold
+N_SPLITS: int = 10
+MIN_TRAIN_MATCHES: int = 150  # ~1 full season before first validation fold
 
 
 class PLModelTrainer:

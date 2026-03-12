@@ -1,34 +1,44 @@
-"""Understat scraper — xG, xGA, and advanced shooting statistics.
+"""Understat / xG data scraper — pivoted to API-Football.
 
-Understat serves data as JSON embedded in ``<script>`` tags, making it
-more reliable to parse than raw HTML tables. This is our primary source
-for expected goals data after FBRef lost Opta access in January 2026.
+IMPORTANT: As of early 2026, Understat renders data entirely via
+client-side JavaScript (league.min.js). The inline ``datesData``
+JSON variable that older scrapers relied on no longer exists in the
+page source — standard HTTP requests return only an 18KB HTML shell.
+
+This module now uses **API-Football** as the primary xG data source.
+The API-Football ``/fixtures`` endpoint with the ``statistics``
+parameter provides per-match xG data for all PL matches.
+
+If API-Football is unavailable, the module degrades gracefully
+by returning match data without xG columns.
 """
 
 from __future__ import annotations
 
-import json
 import logging
-import re
+import os
 from typing import Any
 
+import httpx
 import pandas as pd
+from diskcache import Cache
 
-from ingestion.base_scraper import BaseScraper
+from ingestion.base_scraper import BaseScraper, PROJECT_ROOT
 
 logger = logging.getLogger(__name__)
 
-# Understat uses a different season format: the start year only
-# e.g. https://understat.com/league/EPL/2024
-UNDERSTAT_LEAGUE = "EPL"
+PREMIER_LEAGUE_ID = 39
 
 
 class UnderstatScraper(BaseScraper):
-    """Scrape xG data from Understat for Premier League matches.
+    """Fetch per-match xG data from API-Football.
 
-    Understat embeds match data as JSON inside ``<script>`` tags
-    using the ``datesData`` variable. This scraper extracts and
-    parses that JSON to get per-match xG statistics.
+    Despite the class name (preserved for backward compatibility with
+    the orchestrator), this now wraps the API-Football ``/fixtures``
+    endpoint to retrieve xG statistics per match.
+
+    The API key is loaded from the ``API_FOOTBALL_KEY`` environment
+    variable (supports ``.env`` files via ``python-dotenv``).
 
     Example::
 
@@ -38,249 +48,250 @@ class UnderstatScraper(BaseScraper):
 
     def __init__(
         self,
-        delay_min: float = 2.0,
-        delay_max: float = 5.0,
+        api_key: str | None = None,
+        delay_min: float = 0.5,
+        delay_max: float = 1.0,
         cache_ttl: int = 86400,
     ) -> None:
         super().__init__(
             source_name="understat",
-            base_url="https://understat.com",
+            base_url="https://v3.football.api-sports.io",
             delay_min=delay_min,
             delay_max=delay_max,
             cache_ttl=cache_ttl,
         )
+        self.api_key = api_key or os.environ.get("API_FOOTBALL_KEY", "")
+        if not self.api_key:
+            logger.warning(
+                "[understat/api-football] No API key found. "
+                "Set API_FOOTBALL_KEY in .env file. xG data will be unavailable."
+            )
+
+        self._http_client = httpx.Client(
+            base_url=self.base_url,
+            headers={
+                "x-apisports-key": self.api_key,
+                "Accept": "application/json",
+            },
+            timeout=30.0,
+        )
+        self._api_cache: Cache = Cache(
+            str(PROJECT_ROOT / "data" / "cache" / "understat_apifb")
+        )
 
     def scrape(self, season: str, **kwargs: Any) -> list[dict[str, Any]]:
-        """Fetch match-level xG data from Understat.
+        """Fetch fixtures with statistics from API-Football.
 
         Args:
-            season: Start year of the season (e.g. ``"2024"`` for 2024-25).
+            season: Season start year (e.g. ``"2024"`` for 2024-25).
 
         Returns:
-            List of match dicts with xG data from Understat's embedded JSON.
+            List of fixture dicts including xG from statistics.
         """
-        url = f"{self.base_url}/league/{UNDERSTAT_LEAGUE}/{season}"
-        html = self.fetch_page(url)
-
-        # Understat stores match data in a JS variable called "datesData"
-        # Format: var datesData = JSON.parse('<escaped_json>')
-        match = re.search(
-            r"var\s+datesData\s*=\s*JSON\.parse\('(.+?)'\)",
-            html,
-        )
-
-        if match is None:
-            logger.error(
-                "[understat] Could not find datesData JSON for season %s",
-                season,
-            )
+        if not self.api_key:
+            logger.warning("[understat] No API key — returning empty data.")
             return []
 
-        # The JSON string is escaped — unescape it
-        json_str = match.group(1)
-        json_str = json_str.encode("utf-8").decode("unicode_escape")
+        cache_key = f"fixtures_xg:{season}"
+        cached = self._api_cache.get(cache_key)
+        if cached is not None and isinstance(cached, list):
+            logger.info("[understat] Cache hit for season %s (%d fixtures)", season, len(cached))
+            return cached
+
+        self._rate_limit()
 
         try:
-            dates_data: list[Any] = json.loads(json_str)
-        except json.JSONDecodeError as e:
-            logger.error("[understat] Failed to parse JSON: %s", e)
+            response = self._http_client.get(
+                "/fixtures",
+                params={
+                    "league": PREMIER_LEAGUE_ID,
+                    "season": int(season),
+                    "status": "FT",  # Finished matches only
+                },
+            )
+            response.raise_for_status()
+            data = response.json()
+        except Exception as e:
+            logger.error("[understat] API request failed: %s", e)
             return []
 
-        # Flatten the nested structure: each date contains multiple matches
-        records: list[dict[str, Any]] = []
-        for date_group in dates_data:
-            if isinstance(date_group, list):
-                for match_entry in date_group:
-                    if isinstance(match_entry, dict):
-                        records.append(match_entry)
-            elif isinstance(date_group, dict):
-                records.append(date_group)
+        errors = data.get("errors", {})
+        if errors:
+            logger.error("[understat] API errors: %s", errors)
+            return []
 
-        logger.info(
-            "[understat] Scraped %d match records for season %s",
-            len(records),
-            season,
-        )
-        return records
+        results: list[dict[str, Any]] = data.get("response", [])
+
+        # Now fetch statistics for each fixture to get xG
+        # API-Football includes xG in fixture statistics
+        enriched: list[dict[str, Any]] = []
+        for fixture in results:
+            fixture_id = fixture.get("fixture", {}).get("id")
+            if fixture_id:
+                stats = self._fetch_fixture_stats(fixture_id)
+                fixture["_statistics"] = stats
+            enriched.append(fixture)
+
+        self._api_cache.set(cache_key, enriched, expire=self.cache_ttl)
+        logger.info("[understat] Fetched %d fixtures for season %s", len(enriched), season)
+        return enriched
 
     def parse(self, raw_data: list[dict[str, Any]]) -> pd.DataFrame:
-        """Parse raw Understat JSON records into a standardized DataFrame.
+        """Parse API-Football fixture data into a DataFrame with xG columns.
 
         Args:
-            raw_data: List of match dicts from :meth:`scrape`.
+            raw_data: List of fixture dicts from :meth:`scrape`.
 
         Returns:
-            DataFrame with columns: ``date``, ``home_team``, ``away_team``,
-            ``home_xg``, ``away_xg``, ``home_goals``, ``away_goals``,
-            ``is_result`` (whether the match has been played).
+            DataFrame with ``date``, ``home_team``, ``away_team``,
+            ``home_goals``, ``away_goals``, ``home_xg``, ``away_xg``.
         """
         if not raw_data:
             return pd.DataFrame()
 
-        parsed_rows: list[dict[str, Any]] = []
-
-        for record in raw_data:
-            # Understat nests team info under "h" (home) and "a" (away)
-            home_info = record.get("h", {})
-            away_info = record.get("a", {})
-
-            # Extract team names
-            home_name = (
-                home_info.get("title", "")
-                if isinstance(home_info, dict)
-                else ""
-            )
-            away_name = (
-                away_info.get("title", "")
-                if isinstance(away_info, dict)
-                else ""
-            )
-
-            # Extract goals
-            home_goals = self._safe_int(
-                record.get("goals", {}).get("h")
-                if isinstance(record.get("goals"), dict)
-                else home_info.get("goals")
-                if isinstance(home_info, dict)
-                else None
-            )
-            away_goals = self._safe_int(
-                record.get("goals", {}).get("a")
-                if isinstance(record.get("goals"), dict)
-                else away_info.get("goals")
-                if isinstance(away_info, dict)
-                else None
-            )
-
-            # Extract xG
-            home_xg = self._safe_float(
-                record.get("xG", {}).get("h")
-                if isinstance(record.get("xG"), dict)
-                else home_info.get("xG")
-                if isinstance(home_info, dict)
-                else None
-            )
-            away_xg = self._safe_float(
-                record.get("xG", {}).get("a")
-                if isinstance(record.get("xG"), dict)
-                else away_info.get("xG")
-                if isinstance(away_info, dict)
-                else None
-            )
-
-            is_result = record.get("isResult", False)
-
-            parsed_rows.append({
-                "date": record.get("datetime", ""),
-                "home_team": self.normalize_team_name(home_name),
-                "away_team": self.normalize_team_name(away_name),
-                "home_goals": home_goals,
-                "away_goals": away_goals,
-                "home_xg": home_xg,
-                "away_xg": away_xg,
-                "is_result": is_result,
-                "understat_match_id": record.get("id", ""),
-            })
-
-        result = pd.DataFrame(parsed_rows)
-        result["date"] = pd.to_datetime(result["date"], errors="coerce")
-
-        # Only keep completed matches
-        result = result[result["is_result"] == True].copy()  # noqa: E712
-        result = result.dropna(subset=["date"])
-
-        logger.info("[understat] Parsed %d completed match records", len(result))
-        return result
-
-    # ------------------------------------------------------------------
-    # Team-level aggregation (for season-level stats)
-    # ------------------------------------------------------------------
-
-    def scrape_team_season_stats(self, season: str) -> pd.DataFrame:
-        """Scrape team-level aggregated xG stats for the full season.
-
-        This provides season totals for xG, xGA, xPts which are used
-        for the ``xpts_luck_factor`` feature.
-
-        Args:
-            season: Start year (e.g. ``"2024"``).
-
-        Returns:
-            DataFrame with per-team season aggregates.
-        """
-        url = f"{self.base_url}/league/{UNDERSTAT_LEAGUE}/{season}"
-        html = self.fetch_page(url, use_cache=True)
-
-        # Team-level data is in "teamsData"
-        match = re.search(
-            r"var\s+teamsData\s*=\s*JSON\.parse\('(.+?)'\)",
-            html,
-        )
-
-        if match is None:
-            logger.warning(
-                "[understat] Could not find teamsData for season %s", season
-            )
-            return pd.DataFrame()
-
-        json_str = match.group(1)
-        json_str = json_str.encode("utf-8").decode("unicode_escape")
-
-        try:
-            teams_data: dict[str, Any] = json.loads(json_str)
-        except json.JSONDecodeError as e:
-            logger.error("[understat] Failed to parse teamsData: %s", e)
-            return pd.DataFrame()
-
         rows: list[dict[str, Any]] = []
-        for team_id, team_info in teams_data.items():
-            if not isinstance(team_info, dict):
-                continue
-            title = team_info.get("title", f"Team_{team_id}")
+        for fixture in raw_data:
+            fixture_info = fixture.get("fixture", {})
+            teams_info = fixture.get("teams", {})
+            goals_info = fixture.get("goals", {})
+            stats = fixture.get("_statistics", [])
 
-            # Aggregate match-level data
-            history = team_info.get("history", [])
-            if not history:
-                continue
+            home_name = teams_info.get("home", {}).get("name", "")
+            away_name = teams_info.get("away", {}).get("name", "")
 
-            total_xg = sum(self._safe_float(m.get("xG", 0)) for m in history)
-            total_xga = sum(self._safe_float(m.get("xGA", 0)) for m in history)
-            total_pts = sum(self._safe_int(m.get("pts", 0)) for m in history)
-            total_xpts = sum(self._safe_float(m.get("xpts", 0)) for m in history)
-            matches_played = len(history)
+            # Extract xG from statistics
+            home_xg, away_xg = self._extract_xg(stats, teams_info)
 
             rows.append({
-                "team": self.normalize_team_name(title),
-                "matches_played": matches_played,
-                "xg_total": round(total_xg, 2),
-                "xga_total": round(total_xga, 2),
-                "pts_total": total_pts,
-                "xpts_total": round(total_xpts, 2),
-                "xpts_luck_factor": round(total_pts - total_xpts, 2),
+                "date": fixture_info.get("date", ""),
+                "home_team": self.normalize_team_name(home_name),
+                "away_team": self.normalize_team_name(away_name),
+                "home_goals": goals_info.get("home"),
+                "away_goals": goals_info.get("away"),
+                "home_xg": home_xg,
+                "away_xg": away_xg,
+                "is_result": True,
+                "understat_match_id": fixture_info.get("id", ""),
             })
 
-        return pd.DataFrame(rows)
+        result = pd.DataFrame(rows)
+        result["date"] = pd.to_datetime(result["date"], errors="coerce", utc=True)
+        # Normalize to timezone-naive for merging
+        result["date"] = result["date"].dt.tz_localize(None)
+
+        logger.info("[understat] Parsed %d match records with xG", len(result))
+        return result
+
+    def scrape_team_season_stats(self, season: str) -> pd.DataFrame:
+        """Compute team-level season xG aggregates from fixture data.
+
+        Args:
+            season: Season start year.
+
+        Returns:
+            DataFrame with per-team xG totals for the season.
+        """
+        raw = self.scrape(season)
+        df = self.parse(raw)
+
+        if df.empty:
+            return pd.DataFrame()
+
+        # Aggregate per team from both home and away perspective
+        home_stats = df.groupby("home_team").agg(
+            xg_for=("home_xg", "sum"),
+            xg_against=("away_xg", "sum"),
+            matches_home=("home_team", "count"),
+        ).reset_index().rename(columns={"home_team": "team"})
+
+        away_stats = df.groupby("away_team").agg(
+            xg_for=("away_xg", "sum"),
+            xg_against=("home_xg", "sum"),
+            matches_away=("away_team", "count"),
+        ).reset_index().rename(columns={"away_team": "team"})
+
+        merged = pd.merge(home_stats, away_stats, on="team", how="outer", suffixes=("_h", "_a"))
+        merged = merged.fillna(0)
+
+        merged["xg_total"] = merged["xg_for_h"] + merged["xg_for_a"]
+        merged["xga_total"] = merged["xg_against_h"] + merged["xg_against_a"]
+        merged["matches_played"] = merged["matches_home"] + merged["matches_away"]
+
+        return merged[["team", "matches_played", "xg_total", "xga_total"]].round(2)
 
     # ------------------------------------------------------------------
-    # Helpers
+    # Private helpers
     # ------------------------------------------------------------------
 
-    @staticmethod
-    def _safe_float(value: Any) -> float:
-        """Safely convert a value to float, defaulting to 0.0."""
-        if value is None:
-            return 0.0
+    def _fetch_fixture_stats(self, fixture_id: int) -> list[dict[str, Any]]:
+        """Fetch statistics for a single fixture.
+
+        Args:
+            fixture_id: API-Football fixture ID.
+
+        Returns:
+            List of team statistics dicts.
+        """
+        cache_key = f"fixture_stats:{fixture_id}"
+        cached = self._api_cache.get(cache_key)
+        if cached is not None:
+            return cached if isinstance(cached, list) else []
+
+        self._rate_limit()
+
         try:
-            return float(value)
-        except (ValueError, TypeError):
-            return 0.0
+            response = self._http_client.get(
+                "/fixtures/statistics",
+                params={"fixture": fixture_id},
+            )
+            response.raise_for_status()
+            data = response.json()
+            result: list[dict[str, Any]] = data.get("response", [])
+            self._api_cache.set(cache_key, result, expire=self.cache_ttl * 7)
+            return result
+        except Exception as e:
+            logger.debug("[understat] Stats fetch failed for fixture %d: %s", fixture_id, e)
+            return []
 
     @staticmethod
-    def _safe_int(value: Any) -> int:
-        """Safely convert a value to int, defaulting to 0."""
-        if value is None:
-            return 0
+    def _extract_xg(
+        stats: list[dict[str, Any]],
+        teams_info: dict[str, Any],
+    ) -> tuple[float | None, float | None]:
+        """Extract xG values from fixture statistics.
+
+        Args:
+            stats: Statistics response from API-Football.
+            teams_info: Teams info to match home/away.
+
+        Returns:
+            Tuple of (home_xg, away_xg).
+        """
+        home_xg: float | None = None
+        away_xg: float | None = None
+
+        home_id = teams_info.get("home", {}).get("id")
+        away_id = teams_info.get("away", {}).get("id")
+
+        for team_stats in stats:
+            team_id = team_stats.get("team", {}).get("id")
+            statistics = team_stats.get("statistics", [])
+
+            for stat in statistics:
+                if stat.get("type", "").lower() == "expected_goals":
+                    val = stat.get("value")
+                    xg_val = float(val) if val is not None else None
+
+                    if team_id == home_id:
+                        home_xg = xg_val
+                    elif team_id == away_id:
+                        away_xg = xg_val
+
+        return home_xg, away_xg
+
+    def __del__(self) -> None:
+        """Clean up HTTP client."""
         try:
-            return int(value)
-        except (ValueError, TypeError):
-            return 0
+            self._http_client.close()
+        except Exception:
+            pass

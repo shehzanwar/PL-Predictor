@@ -301,14 +301,18 @@ class PipelineOrchestrator:
         Returns:
             Merged DataFrame with all columns.
         """
-        # Concatenate all season DataFrames
-        fbref_all = pd.concat(
-            [df for df in fbref_dfs if not df.empty], ignore_index=True
-        ) if fbref_dfs else pd.DataFrame()
+        # Filter out empty dataframes first
+        valid_fbref = [df for df in fbref_dfs if not df.empty]
+        if valid_fbref:
+            fbref_all = pd.concat(valid_fbref, ignore_index=True)
+        else:
+            fbref_all = pd.DataFrame()
 
-        understat_all = pd.concat(
-            [df for df in understat_dfs if not df.empty], ignore_index=True
-        ) if understat_dfs else pd.DataFrame()
+        valid_understat = [df for df in understat_dfs if not df.empty]
+        if valid_understat:
+            understat_all = pd.concat(valid_understat, ignore_index=True)
+        else:
+            understat_all = pd.DataFrame()
 
         if fbref_all.empty and understat_all.empty:
             logger.warning("Both FBRef and Understat data are empty.")

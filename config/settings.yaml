@@ -5,14 +5,14 @@
 
 api_football:
   base_url: "https://v3.football.api-sports.io"
-  api_key: "${API_FOOTBALL_KEY}"       # Set via environment variable or .local override
+  api_key: "${API_FOOTBALL_KEY}" # Set via environment variable or .local override
   rate_limit_per_day: 100
-  cache_ttl_seconds: 86400             # 24 hours
+  cache_ttl_seconds: 86400 # 24 hours
 
 scraping:
   fbref:
     base_url: "https://fbref.com/en"
-    request_delay_min: 4.0             # Seconds between requests (avoid Cloudflare)
+    request_delay_min: 4.0 # Seconds between requests (avoid Cloudflare)
     request_delay_max: 8.0
     user_agent_rotate: true
   understat:
@@ -21,8 +21,8 @@ scraping:
     request_delay_max: 5.0
 
 seasons:
-  training_start: 2020                 # Earliest season for training data
-  current: 2025                        # Current season (2025-26)
+  training_start: 2022 # Earliest season for training data
+  current: 2024 # Current season (2025-26)
 
 data_paths:
   raw: "data/raw"
@@ -33,11 +33,11 @@ model:
   primary: "xgboost"
   secondary: "random_forest"
   ensemble_method: "soft_vote"
-  cv_folds: 5
+  cv_folds: 10
   random_state: 42
 
 features:
   rolling_windows: [5, 10]
   h2h_lookback_matches: 10
-  new_manager_threshold_days: 42       # 6 weeks
-  promoted_team_discount: 0.3          # xGA adjustment factor
+  new_manager_threshold_days: 42 # 6 weeks
+  promoted_team_discount: 0.3 # xGA adjustment factor

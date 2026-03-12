@@ -200,6 +200,19 @@ def _clean_feature_matrix(df: pd.DataFrame) -> pd.DataFrame:
     if constant_cols:
         logger.info("Dropping %d constant columns: %s", len(constant_cols), constant_cols)
         df = df.drop(columns=constant_cols)
+    
+    # --- FIX: PREVENT DATA LEAKAGE ---
+    # We must drop the actual match results so the model doesn't "cheat"
+    leakage_cols = [
+        "home_goals_scored", "home_goals_conceded", 
+        "away_goals_scored", "away_goals_conceded",
+        "home_points", "away_points"
+    ]
+    # Only drop them if they exist in the dataframe to prevent KeyError
+    actual_leakage_cols = [c for c in leakage_cols if c in df.columns]
+    if actual_leakage_cols:
+        logger.info("Dropping %d data leakage columns to prevent 100%% accuracy cheat.", len(actual_leakage_cols))
+        df = df.drop(columns=actual_leakage_cols)
 
     # Sort by date
     df = df.sort_values("date").reset_index(drop=True)
