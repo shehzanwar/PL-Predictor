@@ -1,0 +1,43 @@
+# PL-Predictor Configuration
+# --------------------------
+# Copy this file to settings.local.yaml and fill in your API keys.
+# NEVER commit settings.local.yaml to version control.
+
+api_football:
+  base_url: "https://v3.football.api-sports.io"
+  api_key: "${API_FOOTBALL_KEY}"       # Set via environment variable or .local override
+  rate_limit_per_day: 100
+  cache_ttl_seconds: 86400             # 24 hours
+
+scraping:
+  fbref:
+    base_url: "https://fbref.com/en"
+    request_delay_min: 4.0             # Seconds between requests (avoid Cloudflare)
+    request_delay_max: 8.0
+    user_agent_rotate: true
+  understat:
+    base_url: "https://understat.com"
+    request_delay_min: 2.0
+    request_delay_max: 5.0
+
+seasons:
+  training_start: 2020                 # Earliest season for training data
+  current: 2025                        # Current season (2025-26)
+
+data_paths:
+  raw: "data/raw"
+  processed: "data/processed"
+  cache: "data/cache"
+
+model:
+  primary: "xgboost"
+  secondary: "random_forest"
+  ensemble_method: "soft_vote"
+  cv_folds: 5
+  random_state: 42
+
+features:
+  rolling_windows: [5, 10]
+  h2h_lookback_matches: 10
+  new_manager_threshold_days: 42       # 6 weeks
+  promoted_team_discount: 0.3          # xGA adjustment factor

@@ -1,0 +1,167 @@
+{
+  "_comment": "Normalized team name mappings across data sources. Key = canonical name, values = aliases from each source.",
+  "teams": {
+    "Arsenal": {
+      "fbref": "Arsenal",
+      "understat": "Arsenal",
+      "api_football": "Arsenal",
+      "short": "ARS"
+    },
+    "Aston Villa": {
+      "fbref": "Aston Villa",
+      "understat": "Aston Villa",
+      "api_football": "Aston Villa",
+      "short": "AVL"
+    },
+    "Bournemouth": {
+      "fbref": "Bournemouth",
+      "understat": "Bournemouth",
+      "api_football": "Bournemouth",
+      "short": "BOU"
+    },
+    "Brentford": {
+      "fbref": "Brentford",
+      "understat": "Brentford",
+      "api_football": "Brentford",
+      "short": "BRE"
+    },
+    "Brighton": {
+      "fbref": "Brighton and Hove Albion",
+      "understat": "Brighton",
+      "api_football": "Brighton & Hove Albion",
+      "short": "BHA"
+    },
+    "Chelsea": {
+      "fbref": "Chelsea",
+      "understat": "Chelsea",
+      "api_football": "Chelsea",
+      "short": "CHE"
+    },
+    "Crystal Palace": {
+      "fbref": "Crystal Palace",
+      "understat": "Crystal Palace",
+      "api_football": "Crystal Palace",
+      "short": "CRY"
+    },
+    "Everton": {
+      "fbref": "Everton",
+      "understat": "Everton",
+      "api_football": "Everton",
+      "short": "EVE"
+    },
+    "Fulham": {
+      "fbref": "Fulham",
+      "understat": "Fulham",
+      "api_football": "Fulham",
+      "short": "FUL"
+    },
+    "Ipswich Town": {
+      "fbref": "Ipswich Town",
+      "understat": "Ipswich",
+      "api_football": "Ipswich",
+      "short": "IPS"
+    },
+    "Leicester City": {
+      "fbref": "Leicester City",
+      "understat": "Leicester",
+      "api_football": "Leicester",
+      "short": "LEI"
+    },
+    "Liverpool": {
+      "fbref": "Liverpool",
+      "understat": "Liverpool",
+      "api_football": "Liverpool",
+      "short": "LIV"
+    },
+    "Manchester City": {
+      "fbref": "Manchester City",
+      "understat": "Manchester City",
+      "api_football": "Manchester City",
+      "short": "MCI"
+    },
+    "Manchester United": {
+      "fbref": "Manchester Utd",
+      "understat": "Manchester United",
+      "api_football": "Manchester United",
+      "short": "MUN"
+    },
+    "Newcastle United": {
+      "fbref": "Newcastle Utd",
+      "understat": "Newcastle United",
+      "api_football": "Newcastle",
+      "short": "NEW"
+    },
+    "Nottingham Forest": {
+      "fbref": "Nott'ham Forest",
+      "understat": "Nottingham Forest",
+      "api_football": "Nottingham Forest",
+      "short": "NFO"
+    },
+    "Southampton": {
+      "fbref": "Southampton",
+      "understat": "Southampton",
+      "api_football": "Southampton",
+      "short": "SOU"
+    },
+    "Tottenham Hotspur": {
+      "fbref": "Tottenham",
+      "understat": "Tottenham",
+      "api_football": "Tottenham",
+      "short": "TOT"
+    },
+    "West Ham United": {
+      "fbref": "West Ham",
+      "understat": "West Ham United",
+      "api_football": "West Ham",
+      "short": "WHU"
+    },
+    "Wolverhampton Wanderers": {
+      "fbref": "Wolves",
+      "understat": "Wolverhampton Wanderers",
+      "api_football": "Wolves",
+      "short": "WOL"
+    },
+    "Burnley": {
+      "fbref": "Burnley",
+      "understat": "Burnley",
+      "api_football": "Burnley",
+      "short": "BUR"
+    },
+    "Leeds United": {
+      "fbref": "Leeds United",
+      "understat": "Leeds",
+      "api_football": "Leeds",
+      "short": "LEE"
+    },
+    "Luton Town": {
+      "fbref": "Luton Town",
+      "understat": "Luton",
+      "api_football": "Luton",
+      "short": "LUT"
+    },
+    "Sheffield United": {
+      "fbref": "Sheffield Utd",
+      "understat": "Sheffield United",
+      "api_football": "Sheffield Utd",
+      "short": "SHU"
+    },
+    "Watford": {
+      "fbref": "Watford",
+      "understat": "Watford",
+      "api_football": "Watford",
+      "short": "WAT"
+    },
+    "Norwich City": {
+      "fbref": "Norwich City",
+      "understat": "Norwich",
+      "api_football": "Norwich",
+      "short": "NOR"
+    },
+    "West Bromwich Albion": {
+      "fbref": "West Brom",
+      "understat": "West Bromwich Albion",
+      "api_football": "West Brom",
+      "short": "WBA"
+    }
+  }
+}

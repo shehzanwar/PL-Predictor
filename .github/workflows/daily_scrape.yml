@@ -1,0 +1,118 @@
+# ================================================================
+# PL-Predictor — Daily Data Scrape Pipeline
+# ================================================================
+# Runs daily at 2:00 AM UTC to refresh match data, xG stats,
+# injuries, standings, and upcoming fixtures.
+#
+# The updated CSV files in data/processed/ are committed and pushed
+# back to the repository so the Streamlit frontend reads pre-computed
+# data instantly — no live scraping on user visits.
+# ================================================================
+
+name: Daily Data Scrape
+
+on:
+  schedule:
+    # Run daily at 2:00 AM UTC
+    - cron: "0 2 * * *"
+
+  # Allow manual trigger from the GitHub Actions UI
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "Pipeline mode (daily or full)"
+        required: false
+        default: "daily"
+        type: choice
+        options:
+          - daily
+          - full
+
+# Prevent concurrent runs from overlapping
+concurrency:
+  group: daily-scrape
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  scrape:
+    name: Run Data Pipeline
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      # ---- Setup ----
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # ---- Run Pipeline ----
+      - name: Run data ingestion pipeline
+        env:
+          API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
+        run: |
+          MODE="${{ github.event.inputs.mode || 'daily' }}"
+          echo "Running pipeline in ${MODE} mode..."
+          python -m ingestion.orchestrator --mode "${MODE}"
+
+      # ---- Commit & Push ----
+      - name: Check for data changes
+        id: check_changes
+        run: |
+          git add data/processed/
+          if git diff --cached --quiet; then
+            echo "changes=false" >> $GITHUB_OUTPUT
+            echo "No data changes detected."
+          else
+            echo "changes=true" >> $GITHUB_OUTPUT
+            echo "Data changes detected — will commit."
+          fi
+
+      - name: Commit and push updated data
+        if: steps.check_changes.outputs.changes == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore(data): daily scrape update $(date -u '+%Y-%m-%d %H:%M UTC')"
+          git push
+
+      # ---- Post-run summary ----
+      - name: Pipeline summary
+        if: always()
+        run: |
+          echo "## 📊 Pipeline Run Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **Mode:** ${{ github.event.inputs.mode || 'daily' }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Time:** $(date -u '+%Y-%m-%d %H:%M UTC')" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ -f data/processed/pl_matches_merged.csv ]; then
+            ROWS=$(wc -l < data/processed/pl_matches_merged.csv)
+            echo "- **Matches CSV:** ${ROWS} rows" >> $GITHUB_STEP_SUMMARY
+          fi
+          if [ -f data/processed/pl_current_injuries.csv ]; then
+            echo "- **Injuries CSV:** ✅ Updated" >> $GITHUB_STEP_SUMMARY
+          fi
+          if [ -f data/processed/pl_current_standings.csv ]; then
+            echo "- **Standings CSV:** ✅ Updated" >> $GITHUB_STEP_SUMMARY
+          fi
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ -f data/pipeline.log ]; then
+            echo "### Pipeline Log (last 20 lines)" >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            tail -20 data/pipeline.log >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+          fi

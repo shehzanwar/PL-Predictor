@@ -1,0 +1,3 @@
+# This directory holds processed CSV files that are committed to the repo.
+# The GitHub Actions daily_scrape workflow updates these files automatically.
+# The Streamlit frontend reads from this directory for instant page loads.

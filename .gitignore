@@ -1,0 +1,38 @@
+# Git ignore rules for PL-Predictor
+# -----------------------------------
+
+# Data files (raw and cache are NOT committed; processed IS committed for Streamlit)
+data/raw/
+data/cache/
+*.sqlite
+
+# Secrets
+config/settings.local.yaml
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Model artifacts (large files — use git-lfs or don't commit)
+model/saved/*.joblib
+model/saved/*.pkl
